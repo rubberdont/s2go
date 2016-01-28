@@ -15,4 +15,7 @@ router.post('/createService', ServiceController.createService);
 // Update service status
 router.put('/updateServiceStatus', auth.requireToken, ServiceController.updateServiceStatus);
 
+// Delete service by Id
+router.delete('/deleteServiceById/:id', ServiceController.deleteServiceById);
+
 module.exports = router;

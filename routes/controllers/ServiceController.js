@@ -115,3 +115,28 @@ exports.updateServiceStatus = function (req, res){
             });
         }).done();
 };
+
+/**
+ * @api  {DELETE} /services/deleteServiceById/:id
+ * @apiName Delete service
+ * @apiGroup Service
+ * @apiParam {STRING} id ID of service
+ * @apiSuccess JSON "{error : false, message: Delete Successful}"
+ * @apiError JSON "{error : true, message: Delete Failed}"
+ * @apiVersion 0.0.1
+ */
+exports.deleteServiceById = function (req, res){
+    Service.destroy({
+        where: {
+            id : req.params.id
+        }
+    }).then(function (result){
+        if(result > 0) {
+            res.status(200).send({error : false, message : "Delete Successful"});
+        }else{
+            res.status(404).send({error : true, message : "Delete failed"});
+        }
+    }).catch(function (err){
+        res.status(200).send({error : true, message : err});
+    });
+};
