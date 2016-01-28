@@ -17,7 +17,8 @@
     "bcrypt-nodejs": "0.0.3",
     "async": "~1.5.2",
     "mysql": "~2.10.2",
-    "fs": "0.0.2"
+    "fs": "0.0.2",
+    "formidable": "~1.0.17"
   },
   "apidoc": {
     "title": "2GO Ride Api"

@@ -12,7 +12,7 @@ var Service = sequelize.define("service", {
 		allowNull : false,
 		unique: true
 	},
-	icon : {
+	service_icon : {
 		type : Sequelize.STRING,
 		allowNull : true
 	},
