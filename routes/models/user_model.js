@@ -1,6 +1,3 @@
-/**
- * http://usejsdoc.org/
- */
 var Sequelize = require("sequelize");
 var sequelize = require(__dirname + "/../../lib/sequelize");
 var bcrypt    = require('bcrypt-nodejs');

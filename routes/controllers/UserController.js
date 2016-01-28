@@ -3,7 +3,7 @@
  */
 var async = require('async');
 var Sequelize = require('sequelize');
-var User = require(__dirname + '/../models/user');
+var User = require(__dirname + '/../models/user_model');
 
 /**
  * @api {POST} /users/login

@@ -4,10 +4,13 @@ var UserController = require(__dirname + "/controllers/UserController");
 var auth = require(__dirname + '/controllers/AuthController');
 
 
-/* GET users listing. */
+// GET users listing.
 router.get('/', UserController.getUsers);
+// User login
 router.post('/login', UserController.login);
+// User registration
 router.post('/create', UserController.createUser);
+//User update
 router.put('/update/:id', auth.reqToken, UserController.updateUser);
 
 module.exports = router;

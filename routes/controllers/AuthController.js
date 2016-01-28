@@ -1,5 +1,5 @@
 'use strict';
-var User = require(__dirname + '/../models/user');
+var User = require(__dirname + '/../models/user_model');
 
 exports.reqToken = function (req, res, next){
 	var access_token = req.get('Access-Token');
