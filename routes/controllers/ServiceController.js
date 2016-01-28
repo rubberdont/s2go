@@ -3,7 +3,7 @@ var formidable = require('formidable');
 var fs = require('fs');
 var Sequelize = require('sequelize');
 var Service = require(__dirname + '/../models/services_model');
-
+var util = require(__dirname + '/../../helper/utils');
 /**
  * @api {GET} /services
  * @apiName List of services
@@ -41,7 +41,7 @@ exports.createService = function (req, res){
         }
         async.waterfall([
             function (done){
-                moveFile(files.service_icon, function (err, newFile){
+                util.moveFile(files.service_icon, "images", function (err, newFile){
                     done(null, err, newFile);
                 });
             }, function (err, newFile, done){
@@ -68,21 +68,3 @@ exports.createService = function (req, res){
         });
     });
 };
-
-function moveFile(file, callback){
-    fs.readFile(file.path, function (err, data){
-        var directory = __dirname + '/../../public/images/';
-        var newFilePath = directory + file.name;
-        var newFile = '/images/' + file.name;
-        if(!fs.existsSync(directory)){
-            fs.mkdirSync(directory);
-        }
-        fs.writeFile(newFilePath, data, function (err){
-            if(err){
-                callback(err, null);
-            }else{
-                callback(null, newFile);
-            }
-        });
-    });
-}
