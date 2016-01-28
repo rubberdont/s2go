@@ -18,7 +18,7 @@ var Service = sequelize.define("service", {
 	},
 	status : {
 		type : Sequelize.STRING,
-        defaultValue : "Visible",
+        defaultValue : "VISIBLE",
 		allowNull : true
 	}
 });

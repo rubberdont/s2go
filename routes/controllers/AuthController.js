@@ -1,7 +1,7 @@
 'use strict';
 var User = require(__dirname + '/../models/user_model');
 
-exports.reqToken = function (req, res, next){
+exports.requireToken = function (req, res, next){
 	var access_token = req.get('Access-Token');
 	if(!access_token && ('' + access_token).trim().length === 0){
 		return res.status(403).send("Missing Access-Token in headers");
@@ -15,13 +15,13 @@ exports.reqToken = function (req, res, next){
 			req.user = user;
 			next();
 		}else{
-			res.status(400).send({
+			res.status(403).send({
 				error : true,
-				message : "User not found"
+				message : "User authentication required"
 			});
 		}
 	}).catch(function (err){
-		res.status(500).send({
+		res.status(404).send({
 			error : true,
 			message : err
 		});

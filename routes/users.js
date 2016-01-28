@@ -5,12 +5,12 @@ var auth = require(__dirname + '/controllers/AuthController');
 
 
 // GET users listing.
-router.get('/', UserController.getUsers);
+router.get('/', auth.requireToken, UserController.getUsers);
 // User login
 router.post('/login', UserController.login);
 // User registration
 router.post('/create', UserController.createUser);
 //User update
-router.put('/update/:id', auth.reqToken, UserController.updateUser);
+router.put('/update/:id', auth.requireToken, UserController.updateUser);
 
 module.exports = router;

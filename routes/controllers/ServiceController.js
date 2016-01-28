@@ -4,6 +4,7 @@ var fs = require('fs');
 var Sequelize = require('sequelize');
 var Service = require(__dirname + '/../models/services_model');
 var util = require(__dirname + '/../../helper/utils');
+
 /**
  * @api {GET} /services
  * @apiName List of services
@@ -67,4 +68,50 @@ exports.createService = function (req, res){
             }
         });
     });
+};
+
+/**
+ * @api  {PUT} /services/updateServiceStatus
+ * @apiName Update service status
+ * @apiGroup Service
+ * @apiParam {STRING} service_id
+ * @apiParam {STRING} status "Change status to HIDE, VISIBLE"
+ * @apiSuccess JSON "{error : false, message: Update Successful}"
+ * @apiError JSON "{error : true, message: Update Failed}"
+ * @apiVersion 0.0.1
+ */
+exports.updateServiceStatus = function (req, res){
+    if(req.body.service_id == undefined || req.body.service_id.trim().length == 0){
+        return res.status(404).send({error : true, message: "Missing service_id"});
+    }
+    if(req.body.status == undefined || req.body.status.trim().length == 0){
+        return res.status(404).send({error : true, message: "Missing status"});
+    }
+    if(req.body.status != "HIDE" && req.body.status != "VISIBLE"){
+        return res.status(400).send({error : true, message: "status should be HIDE or VISIBLE"});
+    }
+    Service.update(req.body, {
+        where : {
+            id: req.body.service_id
+        }
+    }).then(function (result){
+            if (result > 0) {
+                res.status(200).send({
+                    error: false,
+                    message: "Update success"
+                });
+            } else {
+                res.status(404).send({
+                    error: true,
+                    message: "Record not found"
+                });
+            }
+        })
+        .catch(function (err){
+            console.log(err);
+            res.status(404).send({
+                error : true,
+                message : err
+            });
+        }).done();
 };

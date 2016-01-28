@@ -36,7 +36,6 @@ var User = sequelize.define("user", {
 	  	type : Sequelize.STRING,
 	  	unique : 'socialUnique'
 	}
-	
 }, {
 	classMethods :{
 		getFullName: function (){
