@@ -5,7 +5,7 @@ var auth = require(__dirname + '/controllers/AuthController');
 
 
 // GET users listing.
-router.get('/', auth.requireToken, UserController.getUsers);
+router.get('/', UserController.getUsers);
 // User login
 router.post('/login', UserController.login);
 // User registration

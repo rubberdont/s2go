@@ -127,7 +127,7 @@ exports.socialLogin = function (req, res){
 */
 exports.getUsers = function (req, res){
 	User.findAll({
-		attributes: { exclude: ['password'] }
+		attributes: { exclude: ['password', 'access_token'] }
 	}).then(function (users){
 			res.status(200).send(users);
 		})
@@ -198,6 +198,7 @@ exports.socialCreateUser = function (req, res){
  * @apiParam {STRING} password
  * @apiParam {STRING} first_name
  * @apiParam {STRING} last_name
+ * @apiParam {STRING} phone_number
  * @apiSuccess JSON "User information/data"
  * @apiError JSON "{error : true, message: err msg}"
  * @apiVersion 0.0.1
